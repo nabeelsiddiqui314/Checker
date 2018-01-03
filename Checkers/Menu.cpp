@@ -11,9 +11,19 @@ inline void Menu::init_buttons() {
 	m_play_button.setPosition((SCREEN_WIDTH/2) - (m_play_button.getGlobalBounds().width /2), (SCREEN_HEIGHT/1.5) - (m_play_button.getGlobalBounds().height /2));
 }
 
+inline void Menu::init_title() {
+	m_title.setCharacterSize(200u);
+	m_title.setString("Checkers");
+	m_title.setFillColor(sf::Color::White);
+	m_title.setOutlineColor(sf::Color::Black);
+	m_title.setOutlineThickness(10);
+	m_title.setPosition((SCREEN_WIDTH / 2) - (m_title.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 4) - (m_title.getGlobalBounds().height / 2));
+}
+
 Menu::Menu() {
 	init_backround();
 	init_buttons();
+	init_title();
 }
 
 void Menu::HandleInput(sf::RenderWindow& window) {
@@ -29,6 +39,7 @@ void Menu::Update(sf::RenderWindow& window) {
 void Menu::Render(sf::RenderWindow& window) {
 	window.draw(m_backround);
 	window.draw(m_play_button);
+	window.draw(m_title);
 }
 
 Menu::~Menu() {

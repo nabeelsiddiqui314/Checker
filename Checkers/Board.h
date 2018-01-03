@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "Cell.h"
+#include "Interface.h"
+#include "Piece.h"
 
 class Board
 {
@@ -10,10 +12,11 @@ public:
 	~Board();
 public:
 	void Render(sf::RenderWindow& window);
+public:
+	Cell* m_board[8][8];
 private:
 	void SwapColors();
 private:
-	Cell* m_board[8][8];
 	Color m_color = WHITE;
 };
 

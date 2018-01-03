@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Board.h"
+#include "Player.h"
 
 class Game : public State
 {
@@ -12,6 +13,7 @@ public:
 	void Update(sf::RenderWindow& window);
 	void Render(sf::RenderWindow& window);
 private:
-	Board* m_board;
+	Board*  m_board;
+	Player* m_players;
 };
 

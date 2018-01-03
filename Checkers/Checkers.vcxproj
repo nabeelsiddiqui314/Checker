@@ -159,6 +159,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Piece.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -173,6 +175,8 @@
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

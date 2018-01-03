@@ -6,14 +6,17 @@ enum Color {
 	WHITE = 255
 };
 
-class Cell : public sf::RectangleShape
+class Cell
 {
 public:
 	Cell(const sf::Vector2f& size, const sf::Vector2f& pos, const Color& color);
 	~Cell();
 public:
-	const Color& GetColor() const;
+	const sf::Color& GetColor() const;
+	const sf::RectangleShape& GetCell() const;
+	void Render(sf::RenderWindow& window);
 private:
+	sf::RectangleShape m_cell;
 	Color m_color;
 };
 

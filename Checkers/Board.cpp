@@ -16,7 +16,7 @@ Board::Board(const sf::Vector2f& cellSize, const sf::Vector2f& startPos) {
 void Board::Render(sf::RenderWindow& window) {
 	for (unsigned short int x = 0; x < 8; x++) {
 		for (unsigned short int y = 0; y < 8; y++) {
-			window.draw(*m_board[x][y]);
+			m_board[x][y]->Render(window);
 		}
 	}
 }
@@ -31,5 +31,9 @@ void Board::SwapColors() {
 }
 
 Board::~Board() {
-	delete[] m_board;
+	for (unsigned short int x = 0; x < 8; x++) {
+		for (unsigned short int y = 0; y < 8; y++) {
+			delete m_board[x][y];
+		}
+	}
 }

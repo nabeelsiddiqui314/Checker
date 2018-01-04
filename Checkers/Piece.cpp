@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Piece.h"
 
-
 Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i& pos) : m_piece(filepath)
 {
 	for (unsigned short int x = 0; x < 8; x++) {

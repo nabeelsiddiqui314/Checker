@@ -12,7 +12,7 @@ void Game::HandleInput(sf::RenderWindow& window) {
 }
 
 void Game::Update(sf::RenderWindow& window) {
-	
+	m_players->Update(window);
 }
 
 void Game::Render(sf::RenderWindow& window) {

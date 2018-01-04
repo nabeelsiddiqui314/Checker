@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Board.h"
-#include <array>
+#include "PieceManager.h"
 
 enum class Turn {
 	RED,
@@ -15,13 +15,11 @@ public:
 	~Player();
 public:
 	void SwapTurns();
+	void Update(sf::RenderWindow& window);
 	void RenderPieces(sf::RenderWindow& window);
 private:
-	std::array<Piece*, 12> m_redPieces;
-	std::array<Piece*, 12> m_whitePieces;
-
-	std::array<Piece*, 12>* m_currentPiece = &m_redPieces;
-
 	Turn m_player = Turn::RED;
+	PieceManager* m_redPieces;
+	PieceManager* m_whitePieces;
 };
 

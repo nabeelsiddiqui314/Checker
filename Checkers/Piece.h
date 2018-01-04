@@ -17,5 +17,6 @@ private:
 	Rect  m_piece;
 	Color m_color;
 	Cell* m_board[8][8];
+	bool  m_isSelected;
 };
 

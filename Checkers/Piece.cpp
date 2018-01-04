@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Piece.h"
 
-Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i& pos) : m_piece(filepath)
+Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i& pos, int id) : m_piece(filepath), m_ID(id)
 {
 	for (unsigned short int x = 0; x < 8; x++) {
 		for (unsigned short int y = 0; y < 8; y++) {
@@ -9,7 +9,7 @@ Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i&
 		}
 	}
 	m_piece.setSize(m_board[0][0]->GetCell().getSize());
-	m_piece.setPosition(m_board[pos.x][pos.y]->GetCell().getPosition());
+	Move(pos.x, pos.y);
 }
 
 
@@ -19,6 +19,18 @@ const sf::RectangleShape& Piece::GetPiece() const {
 
 void Piece::Move(int x, int y) {
 	m_piece.setPosition(m_board[x][y]->GetCell().getPosition());
+	m_board[x][y]->SetID(m_ID);
+}
+
+bool Piece::IsSelected(sf::RenderWindow& window) {
+	if (Interface::isClicked(window, m_piece)) {
+		m_isSelected = true;
+	}
+	return m_isSelected;
+}
+
+void Piece::Deselect() {
+	m_isSelected = false;
 }
 
 void Piece::Render(sf::RenderWindow& window) {

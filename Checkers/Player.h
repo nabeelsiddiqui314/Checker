@@ -21,5 +21,6 @@ private:
 	Turn m_player = Turn::RED;
 	PieceManager* m_redPieces;
 	PieceManager* m_whitePieces;
+	PieceManager* m_playerInTurn;
 };
 

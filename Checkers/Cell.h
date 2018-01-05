@@ -14,9 +14,9 @@ public:
 public:
 	const sf::Color& GetColor() const;
 	const sf::RectangleShape& GetCell() const;
+	void Render(sf::RenderWindow& window);
 	void SetID(int id) { m_contentID = id; }
 	int  GetID() const { return m_contentID; }
-	void Render(sf::RenderWindow& window);
 private:
 	sf::RectangleShape m_cell;
 	Color m_color;

@@ -12,10 +12,11 @@ public:
 	~Piece();
 public:
 	const sf::RectangleShape& GetPiece() const;
-	void Move(int x, int y);
+	void Move(int x, int y, bool firstTime = false);
 	bool IsSelected(sf::RenderWindow& window);
 	void Deselect();
 	void Render(sf::RenderWindow& window);
+	void SetColor(sf::Color c) { m_piece.setFillColor(c); }
 private:
 	int   m_ID;
 	Rect  m_piece;

@@ -17,7 +17,14 @@ const sf::RectangleShape& Piece::GetPiece() const {
 	return m_piece;
 }
 
-void Piece::Move(int x, int y) {
+void Piece::Move(int x, int y, bool firstTime) {
+	int currentX = ((m_piece.getPosition().x - m_board[0][0]->GetCell().getPosition().x) / m_board[0][0]->GetCell().getSize().x);
+	int currentY = ((m_piece.getPosition().y - m_board[0][0]->GetCell().getPosition().y) / m_board[0][0]->GetCell().getSize().y);
+
+	if (firstTime) {
+		m_board[currentX][currentY]->SetID(0);
+	}
+
 	m_piece.setPosition(m_board[x][y]->GetCell().getPosition());
 	m_board[x][y]->SetID(m_ID);
 }

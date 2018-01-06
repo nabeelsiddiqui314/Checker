@@ -40,6 +40,18 @@ void Piece::Deselect() {
 	m_isSelected = false;
 }
 
+int  Piece::GetID() const { 
+	return m_ID;
+}
+
+void Piece::MakeKing() {
+	m_isKing = true;
+}
+
+bool Piece::IsKing() const {
+	return m_isKing;
+}
+
 void Piece::Render(sf::RenderWindow& window) {
 	window.draw(m_piece);
 }

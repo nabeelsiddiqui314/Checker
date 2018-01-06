@@ -16,12 +16,15 @@ public:
 	bool IsSelected(sf::RenderWindow& window);
 	void Deselect();
 	void Render(sf::RenderWindow& window);
-	int  GetID() const { return m_ID; }
+	int  GetID() const;
+	void MakeKing();
+	bool IsKing() const;
 private:
 	int   m_ID;
 	Rect  m_piece;
 	Color m_color;
 	Cell* m_board[8][8];
 	bool  m_isSelected = false;
+	bool  m_isKing = false;
 };
 

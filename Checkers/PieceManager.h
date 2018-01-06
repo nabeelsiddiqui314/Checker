@@ -14,7 +14,7 @@ public:
 	PieceManager(Board* board, MoveDir dir);
 	~PieceManager();
 public:
-	void Add(const std::string& filepath, const sf::Vector2i& pos, int id);
+	void Add(const std::array<const std::string, 4> filepath, const sf::Vector2i& pos, int id);
 	void SetOther(PieceManager* other);
 	void Update(sf::RenderWindow& window);
 	void RenderPieces(sf::RenderWindow& window);

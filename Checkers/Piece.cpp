@@ -1,8 +1,13 @@
 #include "stdafx.h"
 #include "Piece.h"
 
-Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i& pos, int id) : m_piece(filepath), m_ID(id)
+Piece::Piece(const std::array<const std::string, 4> filepath, Cell* board[8][8], const sf::Vector2i& pos, int id) : m_ID(id)
 {
+	for (unsigned short int i = 0; i < filepath.size(); i++) {
+		sf::Texture tex;
+		tex.loadFromFile(filepath[i]);
+		m_textures.push_back(tex);
+	}
 	for (unsigned short int x = 0; x < 8; x++) {
 		for (unsigned short int y = 0; y < 8; y++) {
 			m_board[x][y] = board[x][y];
@@ -10,6 +15,7 @@ Piece::Piece(const std::string& filepath, Cell* board[8][8], const sf::Vector2i&
 	}
 	m_piece.setSize(m_board[0][0]->GetCell().getSize());
 	Move(pos.x, pos.y);
+	SetMode(PAWN);
 }
 
 
@@ -50,6 +56,10 @@ void Piece::MakeKing() {
 
 bool Piece::IsKing() const {
 	return m_isKing;
+}
+
+void Piece::SetMode(const Modes& mode) {
+	m_piece.setTexture(&m_textures[mode]);
 }
 
 void Piece::Render(sf::RenderWindow& window) {

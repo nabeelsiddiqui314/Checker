@@ -7,7 +7,7 @@ PieceManager::PieceManager(Board* board, MoveDir dir) : m_board(board), m_moveDi
 }
 
 
-void PieceManager::Add(const std::string& filepath, const sf::Vector2i& pos, int id){
+void PieceManager::Add(const std::array<const std::string, 4> filepath, const sf::Vector2i& pos, int id){
 	Piece* piece = new Piece(filepath, m_board->m_board, pos, id);
 	m_pieces.push_back(piece);
 }
@@ -22,10 +22,14 @@ inline void PieceManager::PieceIterator(sf::RenderWindow& window) {
 		for (unsigned short int j = 0; j < m_pieces.size(); j++) {
 			if (m_selected != m_pieces[j]) {
 				m_pieces[j]->Deselect();
+				if (m_pieces[j]->IsKing()) m_pieces[j]->SetMode(KING);
+				else m_pieces[j]->SetMode(PAWN);
 			}
 		}
 		if (m_pieces[i]->IsSelected(window)) {
 			m_selected = m_pieces[i];
+			if (m_selected->IsKing()) m_selected->SetMode(KING_SELECTED);
+			else m_selected->SetMode(PAWN_SELECTED);
 		}
 	}
 }
@@ -40,6 +44,8 @@ void PieceManager::Update(sf::RenderWindow& window) {
 					if (IsMovable(x, y)) {
 						m_selected->Move(x, y, true);
 						m_shouldSwap = true;
+						if (m_selected->IsKing()) m_selected->SetMode(KING);
+						else m_selected->SetMode(PAWN);
 						m_selected = nullptr;
 					}
 				}
@@ -59,11 +65,13 @@ void PieceManager::CheckKing(Piece& piece) {
 	case UP:
 		if (piece.GetPiece().getPosition().y == m_board->m_board[0][0]->GetCell().getPosition().y) {
 			piece.MakeKing();
+			piece.SetMode(KING);
 		}
 		break;
 	case DOWN:
 		if (piece.GetPiece().getPosition().y == m_board->m_board[0][7]->GetCell().getPosition().y) {
 			piece.MakeKing();
+			piece.SetMode(KING);
 		}
 		break;
 	}

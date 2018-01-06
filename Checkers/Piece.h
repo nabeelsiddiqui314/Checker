@@ -16,7 +16,7 @@ public:
 	bool IsSelected(sf::RenderWindow& window);
 	void Deselect();
 	void Render(sf::RenderWindow& window);
-	void SetColor(sf::Color c) { m_piece.setFillColor(c); }
+	int  GetID() const { return m_ID; }
 private:
 	int   m_ID;
 	Rect  m_piece;

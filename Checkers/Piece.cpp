@@ -44,7 +44,6 @@ void Piece::Render(sf::RenderWindow& window) {
 	window.draw(m_piece);
 }
 
-
 Piece::~Piece()
 {
 }

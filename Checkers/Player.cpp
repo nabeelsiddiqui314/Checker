@@ -3,8 +3,8 @@
 
 
 Player::Player(Board* board) {
-	m_redPieces = new PieceManager(board, UP);
-	m_whitePieces = new PieceManager(board, DOWN);
+	m_redPieces = new PieceManager(board, m_whitePieces, UP);
+	m_whitePieces = new PieceManager(board, m_redPieces, DOWN);
 
 	int skip = 0;
 	for (unsigned short int i = 0; i < 12; i++) {

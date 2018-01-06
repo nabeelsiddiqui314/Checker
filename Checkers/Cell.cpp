@@ -8,11 +8,6 @@ Cell::Cell(const sf::Vector2f& size, const sf::Vector2f& pos, const Color& color
 	m_cell.setFillColor(sf::Color(color, color, color));
 }
 
-
-const sf::Color& Cell::GetColor() const {
-	return sf::Color(m_color, m_color, m_color);
-}
-
 const sf::RectangleShape& Cell::GetCell() const {
 	return m_cell;
 }

@@ -18,6 +18,9 @@ void Game::Update(sf::RenderWindow& window) {
 void Game::Render(sf::RenderWindow& window) {
 	m_board->Render(window);
 	m_players->RenderPieces(window);
+	if (m_players->IsGameOver(window)) {
+		
+	}
 }
 
 Game::~Game()

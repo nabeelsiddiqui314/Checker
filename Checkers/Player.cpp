@@ -1,8 +1,15 @@
 #include "stdafx.h"
 #include "Player.h"
 
+inline void Player::init_text() {
+	m_winnerText.setCharacterSize(200u);
+	m_winnerText.setOutlineColor(sf::Color::Black);
+	m_winnerText.setOutlineThickness(10);
+}
 
 Player::Player(Board* board) {
+	this->init_text();
+
 	m_redPieces = new PieceManager(board, UP);
 	m_whitePieces = new PieceManager(board, DOWN);
 
@@ -52,6 +59,19 @@ void Player::Update(sf::RenderWindow& window) {
 		SwapTurns();
 	}
 	m_playerInTurn->Update(window);
+
+	if (m_redPieces->IsWinner()) {
+		m_winnerText.setFillColor(sf::Color::Red);
+		m_winnerText.setString("Red Wins!");
+		m_winnerText.setPosition((SCREEN_WIDTH / 2) - (m_winnerText.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 4) - (m_winnerText.getGlobalBounds().height / 2));
+		m_gameOver = true;
+	}
+	else if (m_whitePieces->IsWinner()) {
+		m_winnerText.setFillColor(sf::Color(222, 222, 222));
+		m_winnerText.setString("White Wins!");
+		m_winnerText.setPosition((SCREEN_WIDTH / 2) - (m_winnerText.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 4) - (m_winnerText.getGlobalBounds().height / 2));
+		m_gameOver = true;
+	}
 }
 
 void Player::RenderPieces(sf::RenderWindow& window) {
@@ -59,6 +79,12 @@ void Player::RenderPieces(sf::RenderWindow& window) {
 	m_whitePieces->RenderPieces(window);
 }
 
+bool Player::IsGameOver(sf::RenderWindow& window) {
+	if (m_gameOver) {
+		window.draw(m_winnerText);
+	}
+	return m_gameOver;
+}
 
 Player::~Player() {
 	

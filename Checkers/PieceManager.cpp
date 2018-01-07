@@ -18,7 +18,6 @@ void PieceManager::SetOther(PieceManager* other) {
 
 inline void PieceManager::PieceIterator(sf::RenderWindow& window) {
 	for (unsigned short int i = 0; i < m_pieces.size(); i++) {
-		CheckKing(*m_pieces[i]);
 		for (unsigned short int j = 0; j < m_pieces.size(); j++) {
 			if (m_selected != m_pieces[j]) {
 				m_pieces[j]->Deselect();
@@ -36,7 +35,7 @@ inline void PieceManager::PieceIterator(sf::RenderWindow& window) {
 
 void PieceManager::Update(sf::RenderWindow& window) {
 	m_shouldSwap = false;
-	PieceIterator(window);
+	this->PieceIterator(window);
 	if (m_selected != nullptr) {
 		for (unsigned short int x = 0; x < 8; x++) {
 			for (unsigned short int y = 0; y < 8; y++) {
@@ -44,6 +43,7 @@ void PieceManager::Update(sf::RenderWindow& window) {
 					if (IsMovable(x, y)) {
 						m_selected->Move(x, y, true);
 						m_shouldSwap = true;
+						this->CheckKing(*m_selected);
 						if (m_selected->IsKing()) m_selected->SetMode(KING);
 						else m_selected->SetMode(PAWN);
 						m_selected = nullptr;
@@ -52,6 +52,7 @@ void PieceManager::Update(sf::RenderWindow& window) {
 			}
 		}
 	}
+	this->CheckWinner();
 }
 
 void PieceManager::RenderPieces(sf::RenderWindow& window) {
@@ -116,8 +117,10 @@ bool PieceManager::IsMovable(int boardX, int boardY) {
 				return true;
 			}
 		}
+		return (piecePos.y + (cellSize.y * m_moveDir) == cellPos.y || piecePos.y + (cellSize.y * -m_moveDir) == cellPos.y) &&
+			(piecePos.x + cellSize.x == cellPos.x || piecePos.x - cellSize.x == cellPos.x);
 	}
-	return (piecePos.y + (cellSize.y * m_moveDir) == cellPos.y || piecePos.y + (cellSize.y * -m_moveDir) == cellPos.y) &&
+	return (piecePos.y + (cellSize.y * m_moveDir) == cellPos.y) &&
 		(piecePos.x + cellSize.x == cellPos.x || piecePos.x - cellSize.x == cellPos.x);
 }
 
@@ -127,6 +130,12 @@ void PieceManager::Destroy(int x, int y) {
 		if (m_board->m_board[x][y]->GetCell().getPosition() == m_pieces[i]->GetPiece().getPosition()) {
 			m_pieces.erase(m_pieces.begin() + i);
 		}
+	}
+}
+
+void PieceManager::CheckWinner() {
+	if (m_pieces.size() == 0) {
+		m_otherPieces->MakeWinner();
 	}
 }
 

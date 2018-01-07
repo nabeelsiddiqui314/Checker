@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "PieceManager.h"
+#include "Variables.h"
 
 enum class Turn {
 	RED,
@@ -17,11 +18,17 @@ public:
 	void SwapTurns();
 	void Update(sf::RenderWindow& window);
 	void RenderPieces(sf::RenderWindow& window);
+	bool IsGameOver(sf::RenderWindow& window);
+private:
+	inline void init_text();
 private:
 	Turn m_player = Turn::RED;
 	PieceManager* m_redPieces;
 	PieceManager* m_whitePieces;
 	PieceManager* m_playerInTurn;
+	Text          m_winnerText = Text("./assets/fonts/fancy.ttf");
+	bool          m_gameOver = false;
+
 	const std::array<const std::string, 4> m_redFilepaths = {
 		"./assets/pieces/red/pawn.png",
 		"./assets/pieces/red/pawnSelected.png",

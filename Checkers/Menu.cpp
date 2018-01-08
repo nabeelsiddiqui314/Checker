@@ -7,8 +7,12 @@ inline void Menu::init_backround() {
 }
 
 inline void Menu::init_buttons() {
-	m_play_button.setSize(sf::Vector2f(250, 70));
-	m_play_button.setPosition((SCREEN_WIDTH/2) - (m_play_button.getGlobalBounds().width /2), (SCREEN_HEIGHT/1.5) - (m_play_button.getGlobalBounds().height /2));
+	m_play_button.setSize(sf::Vector2f(250, 120));
+	m_play_button.setPosition((SCREEN_WIDTH/2) - (m_play_button.getGlobalBounds().width /2), 350);
+
+	m_quit_button.setSize(sf::Vector2f(250, 120));
+	m_quit_button.setPosition((SCREEN_WIDTH / 2) - (m_quit_button.getGlobalBounds().width / 2), 
+		m_play_button.getPosition().y + 140);
 }
 
 inline void Menu::init_title() {
@@ -30,6 +34,9 @@ void Menu::HandleInput(sf::RenderWindow& window) {
 	if (Interface::isClicked(window, m_play_button)) {
 		stateManager.SetState(new Game());
 	}
+	if (Interface::isClicked(window, m_quit_button)) {
+		window.close();
+	}
 }
 
 void Menu::Update(sf::RenderWindow& window) {
@@ -39,6 +46,7 @@ void Menu::Update(sf::RenderWindow& window) {
 void Menu::Render(sf::RenderWindow& window) {
 	window.draw(m_backround);
 	window.draw(m_play_button);
+	window.draw(m_quit_button);
 	window.draw(m_title);
 }
 

@@ -12,7 +12,6 @@ public:
 	Cell(const sf::Vector2f& size, const sf::Vector2f& pos, const Color& color);
 	~Cell();
 public:
-	void SetC(sf::Color c) { m_cell.setFillColor(c); }
 	const sf::RectangleShape& GetCell() const;
 	void Render(sf::RenderWindow& window);
 	void SetID(int id) { m_contentID = id; }

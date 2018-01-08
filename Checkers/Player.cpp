@@ -2,7 +2,7 @@
 #include "Player.h"
 
 inline void Player::init_text() {
-	m_winnerText.setCharacterSize(200u);
+	m_winnerText.setCharacterSize(150u);
 	m_winnerText.setOutlineColor(sf::Color::Black);
 	m_winnerText.setOutlineThickness(10);
 }
@@ -87,5 +87,6 @@ bool Player::IsGameOver(sf::RenderWindow& window) {
 }
 
 Player::~Player() {
-	
+	delete m_redPieces;
+	delete m_whitePieces;
 }

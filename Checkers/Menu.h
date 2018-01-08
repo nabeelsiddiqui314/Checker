@@ -18,6 +18,7 @@ private:
 private:
 	Rect m_backround = Rect("./assets/backrounds/menu.jpeg");
 	Rect m_play_button = Rect("./assets/buttons/play.png");
+	Rect m_quit_button = Rect("./assets/buttons/quit.png");
 	Text m_title = Text("./assets/fonts/fancy.ttf");
 };
 
